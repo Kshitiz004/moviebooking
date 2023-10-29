@@ -65,20 +65,38 @@ class Home extends Component {
         }
     }
 
-    componentWillMount() {
+    // componentWillMount() {
         // Get upcoming movies
-        let data = null;
-        let xhr = new XMLHttpRequest();
-        let that = this;
-        xhr.addEventListener("readystatechange", function () {
+        // let data = null;
+        // let xhr = new XMLHttpRequest();
+        // let that = this;
+        // xhr.addEventListener("readystatechange", function () {
           
-            if (this.readyState === 4) {
-                debugger;
-                that.setState({
-                    upcomingMovies: JSON.parse(this.responseText).movies
-                });
-            }
-        });
+        //     if (this.readyState === 4) {
+        //         debugger;
+        //         that.setState({
+        //             upcomingMovies: JSON.parse(this.responseText).movies
+        //         });
+        //     }
+        // });
+        componentWillMount() {
+            // Get upcoming movies
+            let data = null;
+            let xhr = new XMLHttpRequest();
+            let that = this;
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    debugger;
+                    try {
+                        const response = JSON.parse(this.responseText);
+                        that.setState({
+                            upcomingMovies: response.movies
+                        });
+                    } catch (error) {
+                        console.error("Error parsing JSON:", error);
+                    }
+                }
+            });
 
         xhr.open("GET", this.props.baseUrl + "movies?status=PUBLISHED");
         xhr.setRequestHeader("Cache-Control", "no-cache");
@@ -87,11 +105,28 @@ class Home extends Component {
         // Get released movies
         let dataReleased = null;
         let xhrReleased = new XMLHttpRequest();
+        // xhrReleased.addEventListener("readystatechange", function () {
+        //     if (this.readyState === 4) {
+        //         that.setState({
+        //             releasedMovies: JSON.parse(this.responseText).movies
+        //         });
+        //     }
+        // });
+
         xhrReleased.addEventListener("readystatechange", function () {
             if (this.readyState === 4) {
-                that.setState({
-                    releasedMovies: JSON.parse(this.responseText).movies
-                });
+                try {
+                    const response = JSON.parse(this.responseText);
+                    if (response && response.movies) {
+                        that.setState({
+                            releasedMovies: response.movies
+                        });
+                    } else {
+                        console.error("Invalid JSON format in response:", this.responseText);
+                    }
+                } catch (error) {
+                    console.error("Error parsing JSON:", error);
+                }
             }
         });
 
@@ -102,13 +137,30 @@ class Home extends Component {
         // Get filters
         let dataGenres = null;
         let xhrGenres = new XMLHttpRequest();
+        // xhrGenres.addEventListener("readystatechange", function () {
+        //     if (this.readyState === 4) {
+        //         that.setState({
+        //             genresList: JSON.parse(this.responseText).genres
+        //         });
+        //     }
+        // });
         xhrGenres.addEventListener("readystatechange", function () {
             if (this.readyState === 4) {
-                that.setState({
-                    genresList: JSON.parse(this.responseText).genres
-                });
+                try {
+                    const response = JSON.parse(this.responseText);
+                    if (response && response.genres) {
+                        that.setState({
+                            genresList: response.genres
+                        });
+                    } else {
+                        console.error("Invalid JSON format in response:", this.responseText);
+                    }
+                } catch (error) {
+                    console.error("Error parsing JSON:", error);
+                }
             }
         });
+        
 
         xhrGenres.open("GET", this.props.baseUrl + "genres");
         xhrGenres.setRequestHeader("Cache-Control", "no-cache");
@@ -117,13 +169,30 @@ class Home extends Component {
         // Get artists
         let dataArtists = null;
         let xhrArtists = new XMLHttpRequest();
+        // xhrArtists.addEventListener("readystatechange", function () {
+        //     if (this.readyState === 4) {
+        //         that.setState({
+        //             artistsList: JSON.parse(this.responseText).artists
+        //         });
+        //     }
+        // });
         xhrArtists.addEventListener("readystatechange", function () {
             if (this.readyState === 4) {
-                that.setState({
-                    artistsList: JSON.parse(this.responseText).artists
-                });
+                try {
+                    const response = JSON.parse(this.responseText);
+                    if (response && response.artists) {
+                        that.setState({
+                            artistsList: response.artists
+                        });
+                    } else {
+                        console.error("Invalid JSON format in response:", this.responseText);
+                    }
+                } catch (error) {
+                    console.error("Error parsing JSON:", error);
+                }
             }
         });
+        
 
         xhrArtists.open("GET", this.props.baseUrl + "artists");
         xhrArtists.setRequestHeader("Cache-Control", "no-cache");
@@ -176,13 +245,30 @@ class Home extends Component {
         let that = this;
         let dataFilter = null;
         let xhrFilter = new XMLHttpRequest();
+        // xhrFilter.addEventListener("readystatechange", function () {
+        //     if (this.readyState === 4) {
+        //         that.setState({
+        //             releasedMovies: JSON.parse(this.responseText).movies
+        //         });
+        //     }
+        // });
         xhrFilter.addEventListener("readystatechange", function () {
             if (this.readyState === 4) {
-                that.setState({
-                    releasedMovies: JSON.parse(this.responseText).movies
-                });
+                try {
+                    const response = JSON.parse(this.responseText);
+                    if (response && response.movies) {
+                        that.setState({
+                            releasedMovies: response.movies
+                        });
+                    } else {
+                        console.error("Invalid JSON format in response:", this.responseText);
+                    }
+                } catch (error) {
+                    console.error("Error parsing JSON:", error);
+                }
             }
         });
+        
 
         xhrFilter.open("GET", this.props.baseUrl + "movies" + encodeURI(queryString));
         xhrFilter.setRequestHeader("Cache-Control", "no-cache");
