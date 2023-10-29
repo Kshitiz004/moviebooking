@@ -83,7 +83,7 @@ class BookShow extends Component {
         )
 
         this.setState({ theatres: newTheatres });
-    }).bind(this);
+    });
 
     theatreChangeHandler = ((event) => {
         this.setState({ theatre: event.target.value });
@@ -102,7 +102,7 @@ class BookShow extends Component {
             ))
         )
         this.setState({ languages: newLanguages });
-    }).bind(this);
+    });
 
     languageChangeHandler = ((event) => {
         this.setState({ language: event.target.value });
@@ -122,7 +122,7 @@ class BookShow extends Component {
         )
 
         this.setState({ showDates: newShowDates });
-    }).bind(this);
+    });
 
     showDateChangeHandler = ((event) => {
         this.setState({ showDate: event.target.value });
@@ -140,11 +140,11 @@ class BookShow extends Component {
         }
 
         this.setState({ unitPrice: unitPrice, availableTickets: availableTickets });
-    }).bind(this);
+    });
 
     ticketsChangeHandler = ((event) => {
         this.setState({ tickets: event.target.value.split(",") });
-    }).bind(this);
+    });
 
     bookShowButtonHandler = (() => {
         this.state.location === "" ? this.setState({ reqLocation: "dispBlock" }) : this.setState({ reqLocation: "dispNone" });
@@ -159,7 +159,7 @@ class BookShow extends Component {
             pathname: '/confirm/' + this.props.match.params.id,
             bookingSummary: this.state
         })
-    }).bind(this);
+    });
 
     render() {
         return (

@@ -1,18 +1,10 @@
-var express = require("express"),
-  http = require("http"),
-  fs = require("fs"),
-  path = require("path"),
-  cors = require("cors");  
+const express = require("express"),
+  cors = require("cors"),
+  bodyParser = require("body-parser");
   require("dotenv").config();
 
-
-  bodyParser = require("body-parser");
-
-
-
-// Running on posrt 9000
-const PORT = process.env.PORT ||8085;
-
+// Running on port 9000
+const PORT = process.env.PORT || 8085;
 
 var app = express();
 
@@ -23,10 +15,10 @@ app.use((req, res, next) => {
     "Origin, X-Requested-With, Content-Type, Accept"
   );
   next();
-}); 
+});
 
 var corsOptions = {
-  origin: "http://localhost:3000"
+  origin: "http://localhost:3000",
 };
 
 app.use(cors(corsOptions));
@@ -51,29 +43,11 @@ db.mongoose
     process.exit();
   });
 
-  
-
-// app.get("/movie", findAllMovies);
-// app.get('',findOne);
-
-// app.get('/genres',function(req,res){
-//     res.send("All Genres Data in JSON format from Mongo DB")
-// })
-
-// app.get('/artists',function(req,res){
-//     res.send("All Artists Data in JSON format from Mongo DB")
-// })
-// app.get("/", (req, res) => {
-//   res.json({
-//     message: "Welcome to Upgrad Movie booking application development.",
-//   });
-// });
-
 require("./routes/movie.routes")(app);
 require("./routes/artist.routes")(app);
 require("./routes/genre.routes")(app);
-require("./routes/user.routes")(app)
+require("./routes/user.routes")(app);
 
 app.listen(PORT, function () {
-  console.log("express has started on port ", PORT);
+  console.log("express has started on port", PORT);
 });

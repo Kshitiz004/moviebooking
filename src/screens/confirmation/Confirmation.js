@@ -119,7 +119,7 @@ class Confirmation extends Component {
     xhr.setRequestHeader("Cache-Control", "no-cache");
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(data);
-  }).bind(this);
+  });
 
   render() {
     const { classes } = this.props;

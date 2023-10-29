@@ -196,7 +196,7 @@ class Header extends Component {
         let that = this;
         xhrSignout.addEventListener("readystatechange", function () {
             if (this.readyState === 4) {
-                if(JSON.parse(this.responseText).message == "Logged Out successfully.")
+                if(JSON.parse(this.responseText).message === "Logged Out successfully.")
                 {
                     sessionStorage.removeItem("uuid");
                     sessionStorage.removeItem("access-token");
