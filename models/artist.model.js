@@ -16,4 +16,3 @@ module.exports = mongoose => {
     
       return Artist;
     };
-  
